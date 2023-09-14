@@ -72,10 +72,10 @@ const App = () => {
       }}
     >
 
-      {<Stack.Navigator initialRouteName={isAuthenticated.authenticated ? "Invoice" : "Invoice"} initialParams={isAuthenticated} screenOptions={{ headerShown: true }}>
+      {<Stack.Navigator initialRouteName={isAuthenticated.authenticated ? "Invoice" : "Authentication"} initialParams={isAuthenticated} screenOptions={{ headerShown: true }}>
 
         <Stack.Screen name="Authentication" component={Authentication} options={{ headerShown: false }} />
-        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: true }} />
         <Stack.Screen name="Invoice" component={Invoice} options={{ headerShown: false }} />
 
       </Stack.Navigator>}

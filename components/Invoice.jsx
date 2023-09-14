@@ -189,7 +189,7 @@ const Invoice = () => {
                         {itemPurchased.map((item, index) =>
                             <><View style={styles.ItemCont} key={index}>
                                 <View style={{}} key={index}>
-                                    <TextInput style={styles.itemInput} placeholder='Model' onChangeText={(val) => { setItem(itemPurchased.splice(index, 1, { Model: val, Quantity: item.Quantity, Price: item.Price })), console.log(itemPurchased) }}  ></TextInput>
+                                    <TextInput style={styles.itemInput} placeholder='Model' onChangeText={(val) => { setItem(itemPurchased.splice(index, 0, { Model: val, Quantity: item.Quantity, Price: item.Price })), console.log(itemPurchased) }}  ></TextInput>
                                 </View>
                                 <View >
                                     <TextInput style={styles.itemInput} placeholder='Quantity'></TextInput>
