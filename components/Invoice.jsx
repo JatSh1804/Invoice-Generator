@@ -6,6 +6,7 @@ import Icon2 from 'react-native-vector-icons/AntDesign';
 
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
+import axios from "axios";
 
 const styles = StyleSheet.create({
     navbar: {
@@ -136,6 +137,23 @@ const Invoice = () => {
 
     //invoice Data contain info about the invoice created.
     const [invoiceData, setinvoiceData] = useState({ customerName: '', invoiceNo: '', invoiceDate: '', DueDate: '', itemPurchased: itemPurchased, totalAmount: totalAmount })
+
+    
+    const handleEmail = async() => {
+        console.log("hello")
+        try{
+            const data = await axios({
+                method : "GET",
+                url : `http://20.198.3.45:3500/api/v1/generatePdf/6503e20b6d08e0f7e56fc1ac`
+            })
+
+            alert("pdf send Successfully")
+
+        }catch(err){
+            console.log(err)
+            alert(err.message)
+        }
+    }
 
 
     useEffect(() => {
@@ -268,7 +286,7 @@ const Invoice = () => {
                             Save Invoice
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn2}>
+                    <TouchableOpacity onPress={handleEmail} style={styles.btn2}>
                         <Text style={styles.btn_text}>
                            Email Invoice
                         </Text>
