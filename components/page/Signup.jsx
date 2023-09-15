@@ -83,7 +83,7 @@ const Signup = () => {
                 console.log("Error:", error)
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                setResponse(<Text style={{textAlign:"center", color: 'red' }}>{errorMessage.slice(11, -1)}</Text>)
+                setResponse(<Text style={{textAlign:"center", color: 'red' }}>{errorMessage.slice(5, -1)}</Text>)
 
                 setDisabled(false)
             })

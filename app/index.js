@@ -36,7 +36,6 @@ const App = () => {
       user ? setisAuthenticated({ authenticated: true, AuthenticatedUserInfo: user }) : setisAuthenticated({ authenticated: false, AuthenticatedUserInfo: user })
       console.log(isAuthenticated.authenticated)
       console.log(isAuthenticated.AuthenticatedUserInfo)
-      console.log(isAuthenticated.AuthenticatedUserInfo)
     })
   }, [])
 
@@ -72,10 +71,10 @@ const App = () => {
       }}
     >
 
-      {<Stack.Navigator initialRouteName={isAuthenticated.authenticated ? "Invoice" : "Authentication"} initialParams={isAuthenticated} screenOptions={{ headerShown: true }}>
+      {<Stack.Navigator initialRouteName={"Authentication"} initialParams={isAuthenticated} screenOptions={{ headerShown: true }}>
 
         <Stack.Screen name="Authentication" component={Authentication} options={{ headerShown: false }} />
-        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: true }} />
+        <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
         <Stack.Screen name="Invoice" component={Invoice} options={{ headerShown: false }} />
 
       </Stack.Navigator>}
