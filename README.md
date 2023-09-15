@@ -8,6 +8,11 @@ Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2Kbmk
 <img src="https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true" alt="Watch the video" width="200" height="350">
 
 
+## Emailed Invoice
+<img src="https://github.com/JatSh1804/Invoice-SIH/blob/main/components/mailedInvoice.png?raw=true" alt="Watch the video" alt="Emailed Invoice" width="800" height="500">
+
+
+
 
 ## Backend for Emailing invoice
 Developed ['API REPO'](https://github.com/rahul-singh01/invoice_generator_backend_SIH) 
