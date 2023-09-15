@@ -5,9 +5,8 @@
 Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2KbmkQokPiGiVu/view?usp=sharing) to Access  PPT.
 
 ## VIDEO PROTOTYPE
-<img src="https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true" alt="Watch the video" width="100" height="200">
+<img src="https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true" alt="Watch the video" width="200" height="350">
 
-![LOGIN ](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/invoice_logo.png?raw=true)
 
 
 ## Backend for Emailing invoice
