@@ -7,8 +7,11 @@ Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2Kbmk
 ## VIDEO PROTOTYPE
 [![Watch the video](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true)](https://youtu.be/vt5fpE0bzSY)
 
-![LOGIN ](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/invoice_logo.png?raw=true)
+![LOGIN ](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/invoice_logo.png?raw=true){width=100px height=200px}
 
+
+## Backend for Emailing invoice
+Developed ['Repo'](https://github.com/rahul-singh01/invoice_generator_backend_SIH) 
 
 
 
@@ -25,10 +28,12 @@ Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2Kbmk
 
 
 ## 📝 Tech Stack Used :
- -React Native
- -MongoDB
- -Express.js
- -EJS Templating
+1. React Native with Expo
+2. Microsoft Azure Server 
+3. Firebase
+4. MongoDB
+5. Express.js
+6. EJS Templating
 
 ## 🚀 How to use
 ```sh
