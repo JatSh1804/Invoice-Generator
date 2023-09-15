@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput, ScrollView } from "react-native"
 import COLORS from '../constant/COLORS'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import Icon2 from 'react-native-vector-icons/AntDesign';
 
 import { useRoute } from '@react-navigation/native';
-
+import { useNavigation } from 'expo-router';
 
 const styles = StyleSheet.create({
+    navbar: {
+        position: 'sticky',
+        top: 0,
+        display: 'flex',
+        flexDirection: "row",
+        height: '12%',
+        width: '100%',
+        backgroundColor: COLORS.primaryColor.s400,
+        padding: 15,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     wrapper: {
         display: 'flex',
         justifyContent: 'center',
@@ -47,12 +59,9 @@ const styles = StyleSheet.create({
 
 
     itemNav: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 2
+        minWidth: 40,
+        // fontWeight: 600,
+        fontSize: 20
     },
     ItemCont: {
         display: 'flex',
@@ -63,9 +72,10 @@ const styles = StyleSheet.create({
         padding: 10
     },
     itemInput: {
-        // padding:5,
-        width: '100%',
-        borderColor: 'grey'
+        padding: 5,
+        borderWidth: 0.9,
+        borderRadius: 10,
+        borderColor: '#888'
     },
 
     line: {
@@ -80,8 +90,9 @@ const styles = StyleSheet.create({
     },
 
     totalCont: {
-        padding: 20,
-        backgroundColor: COLORS.primaryColor.s800
+        padding: 10,
+        borderRadius: 9,
+        backgroundColor: 'rgb(165 209 255)'
     },
 
     totalView: {
@@ -93,9 +104,18 @@ const styles = StyleSheet.create({
     btn: {
         justifyContent: "center",
         textAlign: "center",
+        padding: 15,
         borderRadius: 10,
         backgroundColor: COLORS.primaryColor.s300,
-        height: 40,
+    },
+    btn2: {
+        justifyContent: "center",
+        textAlign: "center",
+        padding: 15,
+        paddingRight: 20,
+        paddingLeft: 20,
+        borderRadius: 10,
+        backgroundColor: 'lightgreen',
     },
     btn_text: {
         textAlign: "center",
@@ -105,12 +125,28 @@ const styles = StyleSheet.create({
 })
 
 const Invoice = () => {
+    const navigation = useNavigation();
     const route = useRoute()
-    const [itemPurchased, setItem] = useState([{ Model: '', Quantity: '', Price: '' }])
+    const [itemInput, setItemInput] = useState({ Model: '', Price: 0, MRP: 0 })
+
+
+    //------------Data to be exported--------------------
+    const [itemPurchased, setItem] = useState([])
+    const [totalAmount, setTotalAmount] = useState(0);
+
+    //invoice Data contain info about the invoice created.
+    const [invoiceData, setinvoiceData] = useState({ customerName: '', invoiceNo: '', invoiceDate: '', DueDate: '', itemPurchased: itemPurchased, totalAmount: totalAmount })
+
 
     useEffect(() => {
         console.log(route.params)
     }, [])
+
+    useEffect(() => {
+        setinvoiceData((prev) => ({ ...prev, itemPurchased: itemPurchased, totalAmount: totalAmount }))
+    }, [itemPurchased][totalAmount])
+
+
     return (
         <ScrollView
             style={{
@@ -118,7 +154,12 @@ const Invoice = () => {
                 backgroundColor: COLORS.secondaryColor.s100,
             }}
         >
-
+            <View style={styles.navbar}>
+                <Text style={{ color: 'white', fontSize: 22, fontWeight: 900 }}>Invoice</Text>
+                <TouchableOpacity>
+                    <Icon2 name='profile' size={30} style={{ color: 'white' }} onPress={() => { navigation.navigate('Dashboard') }} />
+                </TouchableOpacity>
+            </View>
             <View style={styles.wrapper}>
                 <View style={styles.inputCont}>
                     <View style={{}}>
@@ -130,7 +171,7 @@ const Invoice = () => {
                                 style={styles.input_bar}
                                 placeholder="Customer Name"
                                 placeholderTextColor="gray"
-                            // onChangeText={changeUsername}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, customerName: val })) }}
                             // value={username}
                             />
                         </View>
@@ -142,7 +183,7 @@ const Invoice = () => {
                                 style={styles.input_bar}
                                 placeholder="Invoice Number"
                                 placeholderTextColor="gray"
-                            // onChangeText={changeUsername}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, invoiceNo: val })) }}
                             // value={username}
                             />
                         </View>
@@ -157,7 +198,7 @@ const Invoice = () => {
                                 style={styles.input_bar}
                                 placeholder="Invoice Date"
                                 placeholderTextColor="gray"
-                            // onChangeText={changeUsername}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, invoiceDate: val })) }}
                             // value={username}
                             />
                         </View>
@@ -169,7 +210,7 @@ const Invoice = () => {
                                 style={styles.input_bar}
                                 placeholder="Due Date"
                                 placeholderTextColor="gray"
-                            // onChangeText={changeUsername}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, DueDate: val })) }}
                             // value={username}
                             />
                         </View>
@@ -178,50 +219,60 @@ const Invoice = () => {
 
                 </View>
 
-                <View style={{ width: '50%', minWidth: 280, borderWidth: 1, borderColor: 'grey', borderRadius: 10, marginTop: 70 }}>
+                <View style={{ width: '50%', minWidth: 280, borderWidth: 2, borderColor: 'grey', borderRadius: 10, marginTop: 70, marginBottom: 30 }}>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomColor: 'grey', borderBottomWidth: 2 }}>
-                        <Text style={{}}>
-                            Items
-                        </Text><Text>Quantity</Text>
-                        <Text>Price (₹)</Text>
+                        <Text style={styles.itemNav}>Items</Text>
+                        <Text style={styles.itemNav} >MRP (₹)</Text>
+                        <Text style={styles.itemNav}>Price (₹)</Text>
                     </View>
                     <View style={{}}>
                         {itemPurchased.map((item, index) =>
-                            <><View style={styles.ItemCont} key={index}>
-                                <View style={{}} key={index}>
-                                    <TextInput style={styles.itemInput} placeholder='Model' onChangeText={(val) => { setItem(itemPurchased.splice(index, 0, { Model: val, Quantity: item.Quantity, Price: item.Price })), console.log(itemPurchased) }}  ></TextInput>
-                                </View>
-                                <View >
-                                    <TextInput style={styles.itemInput} placeholder='Quantity'></TextInput>
-                                </View>
-                                <View styles={styles.ItemPrice}>
-                                    <TextInput style={styles.itemInput} placeholder='Price'></TextInput>
-                                </View>
-                            </View></>
-                        )
-                        }
-                        <TouchableOpacity style={styles.addfeature}>
+                            <>
+                                <View key={index} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomColor: '#ccc', borderBottomWidth: 2 }}>
+                                    <Text style={{ color: '#888', maxWidth: 90 }} >{item.Model} </Text>
+                                    <Text style={{ color: '#888', maxWidth: 90 }} >{item.MRP}</Text>
+                                    <Text style={{ color: '#888', maxWidth: 90 }} >{item.Price}</Text>
+                                </View></>
+                        )}
+                        <View style={styles.ItemCont} >
+                            <View style={{}} >
+                                <TextInput style={styles.itemInput} placeholder='Service' onChangeText={(val) => { setItemInput((prev) => ({ ...prev, Model: val })) }}  ></TextInput>
+                            </View>
+                            <View >
+                                <TextInput style={styles.itemInput} keyboardType='numeric' placeholder='MRP' onChangeText={(val) => { setItemInput((prev) => ({ ...prev, MRP: val })) }}></TextInput>
+                            </View>
+                            <View styles={styles.ItemPrice}>
+                                <TextInput style={styles.itemInput} keyboardType='numeric' placeholder='Price' onChangeText={(val) => { setItemInput((prev) => ({ ...prev, Price: val })) }}></TextInput>
+                            </View>
+                        </View>
+                        <TouchableOpacity style={styles.addfeature} onPress={() => { (!itemInput.Model || !itemInput.Price || !itemInput.MRP ? alert('Enter Items Information') : setItem((prev) => [...prev, itemInput]), setTotalAmount((prev) => parseInt(itemInput.Price) + parseInt(prev))) }}>
                             <Icon2 name="pluscircle" size={20} style={{ color: "blue", margin: 1 }} />
-                            <Text style={{ color: "blue", fontSize: 16 }} onPress={() => ((setItem(itemPurchased.concat({ Model: '', Quantity: '', Price: '' }))))}> Add Another Item</Text>
+                            <Text style={{ color: "blue", fontSize: 16 }}> Add Another Item</Text>
                         </TouchableOpacity>
                         {/* <View style={styles.line}></View> */}
 
                         <View style={styles.totalCont}>
                             <View style={styles.totalView}>
                                 <Text>SubTotal</Text>
-                                <Text>₹ 5000.00</Text>
+                                <Text>₹ {totalAmount}</Text>
                             </View>
 
                         </View>
-                        <TouchableOpacity style={styles.btn}>
-                            <Text style={styles.btn_text}>
-                                Generate Invoice
-                            </Text>
-                        </TouchableOpacity>
 
-                    </View>
+                    </View >
 
-
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 10, marginBottom: 40 }}>
+                    <TouchableOpacity style={styles.btn} onPress={() => { console.log(invoiceData) }}>
+                        <Text style={styles.btn_text}>
+                            Save Invoice
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btn2}>
+                        <Text style={styles.btn_text}>
+                           Email Invoice
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
