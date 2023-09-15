@@ -5,13 +5,10 @@
 Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2KbmkQokPiGiVu/view?usp=sharing) to Access  PPT.
 
 ## VIDEO PROTOTYPE
-Use['Link']() to check the prototype.
+[![Watch the video](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true)](https://youtu.be/vt5fpE0bzSY)
 
+![LOGIN ](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/invoice_logo.png?raw=true)
 
-## 🚀 How to use
-```sh
-npm i 
-```
 
 
 
@@ -33,6 +30,10 @@ npm i
  -Express.js
  -EJS Templating
 
+## 🚀 How to use
+```sh
+npm i 
+```
 
 
 

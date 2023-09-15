@@ -136,20 +136,20 @@ const Invoice = () => {
     const [totalAmount, setTotalAmount] = useState(0);
 
     //invoice Data contain info about the invoice created.
-    const [invoiceData, setinvoiceData] = useState({ customerName: '', invoiceNo: '', invoiceDate: '', DueDate: '', itemPurchased: itemPurchased, totalAmount: totalAmount })
+    const [invoiceData, setinvoiceData] = useState({ customerName: '', address: '', PhoneNo: '', Pin: '', itemPurchased: itemPurchased, totalAmount: totalAmount })
 
-    
-    const handleEmail = async() => {
+
+    const handleEmail = async () => {
         console.log("hello")
-        try{
-            const data = await axios({
-                method : "GET",
-                url : `http://20.198.3.45:3500/api/v1/generatePdf/6503e20b6d08e0f7e56fc1ac`
-            })
+        try {
+            const data = await axios.get(`http://20.198.3.45:3500/api/v1/generatePdf/1` + route.params.user.email,
+                {
+                    params: { email: route.params.user.email, data: invoiceData }
+                })
 
             alert("pdf send Successfully")
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
             alert(err.message)
         }
@@ -160,9 +160,8 @@ const Invoice = () => {
         console.log(route.params)
     }, [])
 
-    useEffect(() => {
-        setinvoiceData((prev) => ({ ...prev, itemPurchased: itemPurchased, totalAmount: totalAmount }))
-    }, [itemPurchased][totalAmount])
+    // useEffect(() => {
+    // }, [itemPurchased][totalAmount])
 
 
     return (
@@ -195,13 +194,13 @@ const Invoice = () => {
                         </View>
                         <View style={{ marginTop: 20 }}>
                             <Text style={styles.txthead}>
-                                Invoice Number <Text style={{ color: "red" }}>*</Text>
+                                Phone Number <Text style={{ color: "red" }}>*</Text>
                             </Text>
                             <TextInput
                                 style={styles.input_bar}
-                                placeholder="Invoice Number"
+                                placeholder="Phone Number"
                                 placeholderTextColor="gray"
-                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, invoiceNo: val })) }}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, PhoneNo: val })) }}
                             // value={username}
                             />
                         </View>
@@ -210,25 +209,25 @@ const Invoice = () => {
                     <View style={styles.flexInput}>
                         <View>
                             <Text style={styles.txthead}>
-                                Invoice Date <Text style={{ color: "red" }}>*</Text>
+                                Address <Text style={{ color: "red" }}>*</Text>
                             </Text>
                             <TextInput
                                 style={styles.input_bar}
-                                placeholder="Invoice Date"
+                                placeholder="Address"
                                 placeholderTextColor="gray"
-                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, invoiceDate: val })) }}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, address: val })) }}
                             // value={username}
                             />
                         </View>
                         <View>
                             <Text style={styles.txthead}>
-                                Due Date <Text style={{ color: "red" }}>*</Text>
+                                Pin Code <Text style={{ color: "red" }}>*</Text>
                             </Text>
                             <TextInput
                                 style={styles.input_bar}
-                                placeholder="Due Date"
+                                placeholder="Pin Code"
                                 placeholderTextColor="gray"
-                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, DueDate: val })) }}
+                                onChangeText={(val) => { setinvoiceData((prev) => ({ ...prev, Pin: val })) }}
                             // value={username}
                             />
                         </View>
@@ -263,7 +262,7 @@ const Invoice = () => {
                                 <TextInput style={styles.itemInput} keyboardType='numeric' placeholder='Price' onChangeText={(val) => { setItemInput((prev) => ({ ...prev, Price: val })) }}></TextInput>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.addfeature} onPress={() => { (!itemInput.Model || !itemInput.Price || !itemInput.MRP ? alert('Enter Items Information') : setItem((prev) => [...prev, itemInput]), setTotalAmount((prev) => parseInt(itemInput.Price) + parseInt(prev))) }}>
+                        <TouchableOpacity style={styles.addfeature} onPress={() => { (!itemInput.Model || !itemInput.Price || !itemInput.MRP ? alert('Enter Items Information') : setItem((prev) => [...prev, itemInput]), console.log(itemPurchased), setTotalAmount((prev) => parseInt(itemInput.Price) + parseInt(prev))) }}>
                             <Icon2 name="pluscircle" size={20} style={{ color: "blue", margin: 1 }} />
                             <Text style={{ color: "blue", fontSize: 16 }}> Add Another Item</Text>
                         </TouchableOpacity>
@@ -281,14 +280,17 @@ const Invoice = () => {
 
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 10, marginBottom: 40 }}>
-                    <TouchableOpacity style={styles.btn} onPress={() => { console.log(invoiceData) }}>
+                    <TouchableOpacity style={styles.btn} onPress={() => {
+                        setinvoiceData((prev) => ({ ...prev, itemPurchased: itemPurchased, totalAmount: totalAmount }))
+                            , console.log(invoiceData)
+                    }}>
                         <Text style={styles.btn_text}>
                             Save Invoice
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={handleEmail} style={styles.btn2}>
                         <Text style={styles.btn_text}>
-                           Email Invoice
+                            Email Invoice
                         </Text>
                     </TouchableOpacity>
                 </View>
