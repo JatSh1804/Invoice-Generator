@@ -5,13 +5,13 @@
 Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2KbmkQokPiGiVu/view?usp=sharing) to Access  PPT.
 
 ## VIDEO PROTOTYPE
-[![Watch the video](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true){width=100px height=200px}](https://youtu.be/vt5fpE0bzSY)
 
-![LOGIN ](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/invoice_logo.png?raw=true){width=100px height=200px}
+![LOGIN ](https://github.com/JatSh1804/Invoice-SIH/blob/main/components/invoice_logo.png?raw=true)
 
 
 ## Backend for Emailing invoice
-Developed ['Repo'](https://github.com/rahul-singh01/invoice_generator_backend_SIH) 
+Developed ['API REPO'](https://github.com/rahul-singh01/invoice_generator_backend_SIH) 
 
 
 
