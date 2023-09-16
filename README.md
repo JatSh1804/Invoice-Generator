@@ -5,12 +5,11 @@
 Use [`this Drive Link`](https://drive.google.com/file/d/1zKkSb_6k838HNg-Fdw2KbmkQokPiGiVu/view?usp=sharing) to Access  PPT.
 
 ## VIDEO PROTOTYPE
-<img src="https://github.com/JatSh1804/Invoice-SIH/blob/main/components/login.png?raw=true" alt="Watch the video" width="200" height="350">
+Use [`this Link`](https://youtu.be/NgJilYVKESM) to Access Prototype Video.
 
 
 ## Emailed Invoice
 <img src="https://github.com/JatSh1804/Invoice-SIH/blob/main/components/mailedInvoice.png?raw=true" alt="Watch the video" alt="Emailed Invoice" width="800" height="500">
-
 
 
 
